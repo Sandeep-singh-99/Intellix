@@ -1,7 +1,8 @@
-import { CogIcon, Settings2 } from "lucide-react";
+import { CogIcon, Gem, Settings2 } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -12,6 +13,7 @@ import {
   useSidebar,
 } from "./ui/sidebar";
 import { Link } from "react-router-dom";
+import { Button } from "./ui/button";
 
 const MenuOptions = [
   {
@@ -27,7 +29,7 @@ export default function AppSidebar() {
     <Sidebar collapsible="icon">
       <SidebarHeader>
         <div className="flex items-center gap-2">
-            <CogIcon />
+          <CogIcon />
           {open && <h1 className="text-white text-3xl font-bold">Intellix</h1>}
         </div>
       </SidebarHeader>
@@ -50,6 +52,13 @@ export default function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter className="mb-10">
+        <div className="flex gap-2 items-center">
+          <Gem />
+          {open && <h2>Remaining Credits: 5000</h2>}
+        </div>
+        {open && <Button>Upgrade to Unlimited</Button>}
+      </SidebarFooter>
     </Sidebar>
   );
 }

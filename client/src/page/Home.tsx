@@ -1,7 +1,8 @@
 
-
 export default function Home() {
   return (
-    <div>Home asdadasdasdasdasdasasdasdsadsaddasdsadsadsadsadsadsadsadfdfsdfs</div>
+    <div className="min-h-screen bg-[#0c1117] text-white">
+
+    </div>
   )
 }

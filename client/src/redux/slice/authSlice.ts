@@ -91,6 +91,47 @@ const authSlice = createSlice({
             state.loading = false;
             state.error = action.payload as string;
         })
+
+        builder.addCase(login.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+        builder.addCase(login.fulfilled, (state, action) => {
+            state.loading = false;
+            state.user = action.payload;
+        })
+        builder.addCase(login.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload as string;
+        })
+
+        builder.addCase(logout.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+        builder.addCase(logout.fulfilled, (state) => {
+            state.loading = false;
+            state.user = null;
+        })
+        builder.addCase(logout.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload as string;
+        })
+
+        builder.addCase(currentUser.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+
+        builder.addCase(currentUser.fulfilled, (state, action) => {
+            state.loading = false;
+            state.user = action.payload;
+        })
+
+        builder.addCase(currentUser.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload as string;
+        })
     }
 });
 

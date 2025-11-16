@@ -1,4 +1,4 @@
-import { Loader2, Lock, Mail, User2Icon } from "lucide-react";
+import { Loader, Lock, Mail, User2Icon } from "lucide-react";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -17,6 +17,7 @@ import { useState } from "react";
 import { useAppDispatch } from "@/hooks/hooks";
 import { toast } from "react-toastify";
 import { login, register } from "@/redux/slice/authSlice";
+import type { AxiosError } from "axios";
 
 export default function AuthComponents() {
   const [email, setEmail] = useState("");
@@ -26,6 +27,7 @@ export default function AuthComponents() {
     email: "",
     password: "",
   });
+  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const dispatch = useAppDispatch();
@@ -48,8 +50,12 @@ export default function AuthComponents() {
       formData.append("password", password);
       await dispatch(login(formData)).unwrap();
       toast.success("Login successful");
+      setOpen(false);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "An error occurred");
+      const axiosError = error as AxiosError<{ detail: string }>;
+      const errorMessage =
+        axiosError.response?.data?.detail || "Invalid Credentials";
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -69,16 +75,19 @@ export default function AuthComponents() {
       formDataObj.append("password", formData.password);
       await dispatch(register(formDataObj)).unwrap();
       toast.success("Registration successful");
+      setOpen(false);
     } catch (error) {
-        toast.error(error instanceof Error ? error.message : "An error occurred");
+      const axiosError = error as AxiosError<{ detail: string }>;
+      const errorMessage =
+        axiosError.response?.data?.detail || "Invalid Credentials";
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }
   };
 
-  
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" className="cursor-pointer rounded-2xl">
           Log in
@@ -139,7 +148,7 @@ export default function AuthComponents() {
                   </Button>
                 </DialogClose>
                 <Button type="submit" className="rounded-lg" disabled={loading}>
-                  {loading && <Loader2 className="animate-spin" />}
+                  {loading && <Loader className="animate-spin" />}
                   Log In
                 </Button>
               </DialogFooter>
@@ -203,7 +212,7 @@ export default function AuthComponents() {
                 </Button>
               </DialogClose>
               <Button type="submit" className="rounded-lg" disabled={loading}>
-                {loading && <Loader2 className="animate-spin" />}
+                {loading && <Loader className="animate-spin" />}
                 Sign Up
               </Button>
             </DialogFooter>

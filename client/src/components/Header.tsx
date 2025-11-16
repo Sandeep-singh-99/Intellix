@@ -10,7 +10,7 @@ export default function Header() {
     <nav className="flex justify-between items-center w-full p-4 shadow bg-sidebar">
       <SidebarTrigger />
       {user ? (
-        <div className="w-10 h-10 rounded-full bg-gray-600 flex items-center justify-center text-white font-semibold text-lg">
+        <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white font-semibold text-lg">
           {user.full_name[0].toUpperCase()}
         </div>
       ) : (

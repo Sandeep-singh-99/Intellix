@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config.db import Base, engine
 from app.models import auth
 from app.router.auth import router as auth_router
+from app.router.chats import router as chats_router
 
 app = FastAPI()
 
@@ -24,6 +25,7 @@ def on_startup():
 
 
 app.include_router(auth_router, prefix="/auth", tags=["auth"])
+app.include_router(chats_router, prefix="/chats", tags=["chats"])
 
 @app.get("/")
 async def read_root():

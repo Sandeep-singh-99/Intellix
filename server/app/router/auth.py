@@ -75,4 +75,4 @@ async def logout(current_user: User = Depends(get_current_user), response: Respo
            samesite="none"
     )
 
-    return {"detail": "Successfully logged out", "user": current_user}
+    return {"message": "Successfully logged out", "user": current_user}

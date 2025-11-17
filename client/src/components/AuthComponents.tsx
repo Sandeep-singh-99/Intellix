@@ -204,8 +204,7 @@ export default function AuthComponents() {
                   />
                 </div>
               </div>
-            </form>
-            <DialogFooter className="flex justify-between mt-6">
+               <DialogFooter className="flex justify-between mt-6">
               <DialogClose asChild>
                 <Button variant="secondary" className="rounded-lg">
                   Close
@@ -216,6 +215,7 @@ export default function AuthComponents() {
                 Sign Up
               </Button>
             </DialogFooter>
+            </form>
           </TabsContent>
         </Tabs>
       </DialogContent>
